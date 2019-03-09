@@ -17,6 +17,8 @@ class Board extends Component {
           <img src={TwoClubs} draggable="false" style={styles.card}/>
         </div>
 
+        <h1 style={styles.pot}>Pot: 500</h1>
+
         <div style={styles.players}>
           <div>
             <h1 style={styles.bet}>Bet: 150</h1>
@@ -67,6 +69,10 @@ const styles = {
   },
   bet: {
     textAlign: 'center'
+  },
+  pot: {
+    textAlign: 'center',
+    fontSize: '5vw'
   }
 }
 

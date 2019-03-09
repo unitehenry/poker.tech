@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Landing from './components/Landing';
 import Board from './components/Board';
+import Hand from './components/Hand';
 
 import './App.css';
 
