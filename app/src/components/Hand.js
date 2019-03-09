@@ -32,7 +32,7 @@ class Hand extends Component {
                       <React.Fragment>
                         <h1 style={styles.action}>100</h1>
                         <h1 style={styles.action}>200</h1>
-                        <h1 style={styles.action}>All In</h1>
+                        <h1 style={styles.actionAllIn}>All In</h1>
                       </React.Fragment>
                     ) : <h1 style={styles.action}>Check</h1>
                   }
@@ -76,6 +76,14 @@ const styles = {
   action: {
     flexGrow: 1,
     backgroundColor: '#134611',
+    textAlign: 'center',
+    margin: 0,
+    padding: '5vh',
+    cursor: 'pointer'
+  },
+  actionAllIn: {
+    flexGrow: 1,
+    backgroundColor: 'red',
     textAlign: 'center',
     margin: 0,
     padding: '5vh',
