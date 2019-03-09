@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 
 class Landing extends Component{
 
-  state = {
-    dealer: false
-  }
-
   setDealer = () => {
     this.setState({dealer: true})
+    this.props.isPlayer(false)
   }
 
   render(){
@@ -15,8 +12,8 @@ class Landing extends Component{
       <div>
         <p style={styles.header}>Poker.Tech</p>
         <div style={styles.buttons}>
-          { this.state.dealer ? null : <p style={styles.button} onClick={this.setDealer}>Dealer</p>}
-          <p style={styles.button}>{this.state.dealer ? 'Join' : 'Player'}</p>
+          { this.props.dealer ? null : <p style={styles.button} onClick={this.setDealer}>Dealer</p>}
+          <p style={styles.button} onClick={() => this.props.isPlayer(true)}>{this.props.dealer ? 'Join' : 'Player'}</p>
         </div>
       </div>
     )
@@ -29,7 +26,7 @@ const styles = {
     textAlign: 'center',
     fontSize: '10vw',
     marginTop: '25vh',
-    color: '#FFAAEA',
+    color: '#D0F1BF',
     textShadow: '1px 1px #001514'
   },
   buttons: {
@@ -38,7 +35,7 @@ const styles = {
     flexWrap: 'wrap'
   },
   button: {
-    backgroundColor: '#FFAAEA',
+    backgroundColor: '#D0F1BF',
     textAlign: 'center',
     border: '1px solid #001514',
     padding: '15px',
