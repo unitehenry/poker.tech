@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+
+html{
+  background-color: #E574BC;
+  color: #EEE2DF;
+}
+
+.App{
+  font-family: 'Orbitron', sans-serif;
+}
