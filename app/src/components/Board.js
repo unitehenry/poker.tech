@@ -40,7 +40,7 @@ const styles = {
     textAlign: 'center',
     fontSize: '5vw',
     marginTop: '5vh',
-    color: '#FFAAEA',
+    color: '#F3EFF5',
     textShadow: '1px 1px #001514',
   },
   board: {

@@ -1,10 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Orbitron');
 
+@font-face {
+  font-family: 'digital';
+  src: url('./assets/DS-DIGI.TTF');
+}
+
 html{
-  background-color: #E574BC;
-  color: #EEE2DF;
+  background-color: #3F7D20;
+  color: #F3EFF5;
 }
 
 .App{
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'digital', sans-serif;
 }
