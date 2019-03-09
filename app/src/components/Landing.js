@@ -2,13 +2,21 @@ import React, { Component } from 'react';
 
 class Landing extends Component{
 
+  state = {
+    dealer: false
+  }
+
+  setDealer = () => {
+    this.setState({dealer: true})
+  }
+
   render(){
     return(
       <div>
         <p style={styles.header}>Poker.Tech</p>
         <div style={styles.buttons}>
-          <p style={styles.button}>Dealer</p>
-          <p style={styles.button}>Player</p>
+          { this.state.dealer ? null : <p style={styles.button} onClick={this.setDealer}>Dealer</p>}
+          <p style={styles.button}>{this.state.dealer ? 'Join' : 'Player'}</p>
         </div>
       </div>
     )
