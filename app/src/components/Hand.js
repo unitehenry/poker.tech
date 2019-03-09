@@ -4,6 +4,10 @@ import TwoClubs from '../assets/cards/2C.jpg';
 
 class Hand extends Component {
 
+  state = {
+    bet: true
+  }
+
   render(){
     return(
       <React.Fragment>
@@ -13,8 +17,19 @@ class Hand extends Component {
           <img src={TwoClubs} style={styles.card}/>
         </div>
         <div style={styles.betting}>
-          <h1>Fold</h1>
-          <h1>Bet</h1>
+          <h1 style={styles.action}>Fold</h1>
+          <div style={styles.betActions}>
+            {
+              this.state.bet ? (
+                <React.Fragment>
+                  <h1 style={styles.action}>100</h1>
+                  <h1 style={styles.action}>200</h1>
+                  <h1 style={styles.action}>All In</h1>
+                </React.Fragment>
+              ) : <h1 style={styles.action}>Check</h1>
+            }
+
+          </div>
         </div>
       </React.Fragment>
     )
@@ -36,6 +51,24 @@ const styles = {
     borderRadius: '10px',
     border: '2px solid #001514',
     margin: '1em'
+  },
+  betting: {
+    display: 'flex',
+    bottom: 0,
+    position: 'absolute',
+    width: '100vw'
+  },
+  betActions: {
+    display: 'flex',
+    flexGrow: 1
+  },
+  action: {
+    flexGrow: 1,
+    backgroundColor: '#134611',
+    textAlign: 'center',
+    margin: 0,
+    padding: '5vh',
+    cursor: 'pointer'
   }
 }
 
