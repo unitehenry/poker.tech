@@ -18,8 +18,8 @@ class Hand extends Component {
       <React.Fragment>
         <h1 style={styles.player}>Player One</h1>
         <div style={styles.hand}>
-          <img src={TwoClubs} draggable="false" style={styles.card}/>
-          <img src={TwoClubs} draggable="false" style={styles.card}/>
+          <img src={TwoClubs} draggable="false" alt="card" style={styles.card}/>
+          <img src={TwoClubs} draggable="false" alt="card" style={styles.card}/>
         </div>
         <div style={styles.betting}>
           {

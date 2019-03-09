@@ -9,12 +9,12 @@ class Board extends Component {
       <React.Fragment>
         <h1 style={styles.header}>Poker.Tech</h1>
         <div style={styles.board}>
-          <img src={TwoClubs} draggable="false" style={styles.card}/>
-          <img src={TwoClubs} draggable="false" style={styles.card}/>
-          <img src={TwoClubs} draggable="false" style={styles.card}/>
+          <img src={TwoClubs} draggable="false" alt="card" style={styles.card}/>
+          <img src={TwoClubs} draggable="false" alt="card" style={styles.card}/>
+          <img src={TwoClubs} draggable="false" alt="card" style={styles.card}/>
 
-          <img src={TwoClubs} draggable="false" style={styles.card}/>
-          <img src={TwoClubs} draggable="false" style={styles.card}/>
+          <img src={TwoClubs} draggable="false" alt="card" style={styles.card}/>
+          <img src={TwoClubs} draggable="false" alt="card" style={styles.card}/>
         </div>
 
         <h1 style={styles.pot}>Pot: 500</h1>
