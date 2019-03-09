@@ -18,8 +18,8 @@ class Hand extends Component {
       <React.Fragment>
         <h1 style={styles.player}>Player One</h1>
         <div style={styles.hand}>
-          <img src={TwoClubs} style={styles.card}/>
-          <img src={TwoClubs} style={styles.card}/>
+          <img src={TwoClubs} draggable="false" style={styles.card}/>
+          <img src={TwoClubs} draggable="false" style={styles.card}/>
         </div>
         <div style={styles.betting}>
           {
@@ -32,6 +32,7 @@ class Hand extends Component {
                       <React.Fragment>
                         <h1 style={styles.action}>100</h1>
                         <h1 style={styles.action}>200</h1>
+                        <h1 style={styles.action}>400</h1>
                         <h1 style={styles.actionAllIn}>All In</h1>
                       </React.Fragment>
                     ) : <h1 style={styles.action}>Check</h1>
