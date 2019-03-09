@@ -5,7 +5,12 @@ import TwoClubs from '../assets/cards/2C.jpg';
 class Hand extends Component {
 
   state = {
-    bet: true
+    bet: true,
+    stack: 0
+  }
+
+  buyIn = () => {
+    this.setState({stack: 1500})
   }
 
   render(){
@@ -17,19 +22,25 @@ class Hand extends Component {
           <img src={TwoClubs} style={styles.card}/>
         </div>
         <div style={styles.betting}>
-          <h1 style={styles.action}>Fold</h1>
-          <div style={styles.betActions}>
-            {
-              this.state.bet ? (
-                <React.Fragment>
-                  <h1 style={styles.action}>100</h1>
-                  <h1 style={styles.action}>200</h1>
-                  <h1 style={styles.action}>All In</h1>
-                </React.Fragment>
-              ) : <h1 style={styles.action}>Check</h1>
-            }
+          {
+            this.state.stack !== 0 ? (
+              <React.Fragment>
+                <h1 style={styles.action}>Fold</h1>
+                <div style={styles.betActions}>
+                  {
+                    this.state.bet ? (
+                      <React.Fragment>
+                        <h1 style={styles.action}>100</h1>
+                        <h1 style={styles.action}>200</h1>
+                        <h1 style={styles.action}>All In</h1>
+                      </React.Fragment>
+                    ) : <h1 style={styles.action}>Check</h1>
+                  }
+                </div>
+              </React.Fragment>
+            ) : <h1 style={styles.action} onClick={this.buyIn}>Buy In</h1>
+          }
 
-          </div>
         </div>
       </React.Fragment>
     )
