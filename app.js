@@ -15,6 +15,11 @@ io.on('connection', (socket) => {
     socket.join(id)
     console.log(`client connected to ${id}`)
   })
+
+  socket.on('player join', (id) => {
+    console.log(`player joined in ${id}`)
+    io.to(id).emit('player join');
+  })
 })
 
 http.listen(port, () => console.log(`Poker.Tech Online`))

@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 
 import Cards from '../Card';
 
+import io from 'socket.io-client';
+
 const Card = new Cards();
+
+const socket = io('http://localhost:8080/');
 
 class Board extends Component {
 
@@ -13,16 +17,15 @@ class Board extends Component {
       river: ''
     },
     pot: 0,
-    players: [
-      {bet: 0, stack: 1500},
-      {bet: 0, stack: 1500},
-      {bet: 0, stack: 1500},
-      {bet: 0, stack: 1500},
-      {bet: 0, stack: 1500},
-      {bet: 0, stack: 1500},
-      {bet: 0, stack: 1500},
-      {bet: 0, stack: 1500}
-    ]
+    players: []
+  }
+
+  componentDidMount(){
+    socket.on('player join', () => {
+      let players = this.state.players;
+      players.push({bet: 0, stack: 1500})
+      this.setState({players: players})
+    })
   }
 
   render(){

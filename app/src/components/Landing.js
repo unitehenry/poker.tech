@@ -10,6 +10,11 @@ class Landing extends Component{
     this.props.isPlayer(false)
   }
 
+  playerJoin = () => {
+    this.props.isPlayer(true);
+    socket.emit('player join', this.props.match.params.id)
+  }
+
   componentDidMount(){
     socket.emit('join game', this.props.match.params.id)
   }
@@ -20,7 +25,7 @@ class Landing extends Component{
         <p style={styles.header}>Poker.Tech</p>
         <div style={styles.buttons}>
           { this.props.dealer ? null : <p style={styles.button} onClick={this.setDealer}>Dealer</p>}
-          <p style={styles.button} onClick={() => this.props.isPlayer(true)}>{this.props.dealer ? 'Join' : 'Player'}</p>
+          <p style={styles.button} onClick={this.playerJoin}>{this.props.dealer ? 'Join' : 'Player'}</p>
         </div>
       </div>
     )

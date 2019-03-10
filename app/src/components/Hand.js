@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 
 import Cards from '../Card';
 
+import io from 'socket.io-client';
+
 const Card = new Cards();
+
+const socket = io('http://localhost:8080/');
 
 class Hand extends Component {
 
@@ -20,6 +24,10 @@ class Hand extends Component {
 
   fold = () => {
     this.setState({hand: []})
+  }
+
+  componentDidMount() {
+    
   }
 
   render(){
