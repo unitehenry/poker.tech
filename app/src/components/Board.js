@@ -24,7 +24,13 @@ class Board extends Component {
     socket.emit('join game', this.props.id);
 
     socket.on('player join', (socketId) => {
-      if(this.state.players.length < 8){
+      let currentPlayers = 0;
+
+      this.state.players.forEach((player) => {
+        if(player !== null){currentPlayers++}
+      })
+
+      if(currentPlayers < 8){
         let newPlayer = {id: this.state.players.length + 1, socketId: socketId, bet: 0, stack: 1500, hand: []}
         let players = this.state.players;
         players.push(newPlayer);
@@ -42,7 +48,7 @@ class Board extends Component {
     let players = this.state.players;
 
     players = this.state.players.map((player) => {
-      if(player.socketId !== null){
+      if(player !== null){
         if(player.socketId === id){return null}
         else{ return player }
       }
