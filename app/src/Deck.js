@@ -52,6 +52,10 @@ class Deck {
       }
     }
   }
+
+  dealTop(){
+    return this.cards.splice(Math.floor(Math.random() * 52, 1))[0];
+  }
 }
 
 export default Deck;
