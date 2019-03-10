@@ -15,7 +15,7 @@ class Hand extends Component {
     bet: 0,
     stack: 0,
     hand: [],
-    player: null,
+    id: null,
     pot: 0
   }
 
@@ -31,19 +31,14 @@ class Hand extends Component {
     socket.emit('join game', this.props.id);
 
     socket.on('player update', (player) => {
-      this.setState({
-        bet: player.bet,
-        stack: player.stack,
-        hand: player.hand,
-        player: player.id
-      })
+      this.setState(player)
     })
   }
 
   render(){
     return(
       <React.Fragment>
-        <h1 style={styles.player}>Player {this.state.player}</h1>
+        <h1 style={styles.player}>Player {this.state.id}</h1>
         <div style={styles.hand}>
           {
             this.state.hand.length > 0 ? (
