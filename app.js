@@ -17,7 +17,15 @@ io.on('connection', (socket) => {
   })
 
   socket.on('player join', (id) => {
-    io.to(id).emit('player join');
+    io.to(id).emit('player join', socket.id);
+  })
+
+  socket.on('update player', (player) => {
+    io.to(player.socketId).emit('player update', player)
+  })
+
+  socket.on('disconnect', () => {
+    io.emit('player disconnect', socket.id)
   })
 })
 

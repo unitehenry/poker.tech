@@ -23,13 +23,30 @@ class Board extends Component {
   componentDidMount(){
     socket.emit('join game', this.props.id);
 
-    socket.on('player join', () => {
+    socket.on('player join', (socketId) => {
       if(this.state.players.length < 8){
+        let newPlayer = {id: this.state.players.length + 1, socketId: socketId, bet: 0, stack: 1500, hand: []}
         let players = this.state.players;
-        players.push({bet: 0, stack: 1500});
+        players.push(newPlayer);
         this.setState({players: players})
+        socket.emit('update player', newPlayer)
       }
     })
+
+    socket.on('player disconnect', (id) => {
+      this.dropPlayer(id);
+    })
+  }
+
+  dropPlayer = (id) => {
+    let players = this.state.players;
+
+    players = this.state.players.map((player) => {
+      if(player.socketId === id && player.socketId !== null){return null}
+      else{ return player }
+    })
+
+    this.setState({players: players})
   }
 
   render(){
@@ -57,20 +74,24 @@ class Board extends Component {
 
           {
             this.state.players.map((player, index) => {
-              if(player.bet > 0){
-                return(
-                  <div key={index}>
-                    <h1 style={styles.bet}>Bet: {player.bet}</h1>
-                    <h1 style={styles.player}>P{index + 1} - {player.stack}</h1>
-                  </div>
-                )
-              } else {
-                return(
-                  <div key={index}>
-                    <br/>
-                    <h1 style={styles.player}>P{index + 1} - {player.stack}</h1>
-                  </div>
-                )
+              if(player === null) {
+                return null
+              } else{
+                if(player.bet > 0){
+                  return(
+                    <div key={index}>
+                      <h1 style={styles.bet}>Bet: {player.bet}</h1>
+                      <h1 style={styles.player}>P{index + 1} - {player.stack}</h1>
+                    </div>
+                  )
+                } else {
+                  return(
+                    <div key={index}>
+                      <br/>
+                      <h1 style={styles.player}>P{index + 1} - {player.stack}</h1>
+                    </div>
+                  )
+                }
               }
             })
           }

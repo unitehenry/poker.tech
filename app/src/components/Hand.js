@@ -11,17 +11,16 @@ const socket = io('http://localhost:8080/');
 class Hand extends Component {
 
   state = {
+    socketId: '',
     bet: 0,
     stack: 0,
     hand: [],
-    player: 1,
+    player: null,
     pot: 0
   }
 
   buyIn = () => {
     socket.emit('player join', this.props.id)
-
-    this.setState({stack: 1500, hand: [Card.generateCard(), Card.generateCard()]})
   }
 
   fold = () => {
@@ -30,6 +29,15 @@ class Hand extends Component {
 
   componentDidMount() {
     socket.emit('join game', this.props.id);
+
+    socket.on('player update', (player) => {
+      this.setState({
+        bet: player.bet,
+        stack: player.stack,
+        hand: player.hand,
+        player: player.id
+      })
+    })
   }
 
   render(){
