@@ -24,6 +24,10 @@ io.on('connection', (socket) => {
     io.to(player.socketId).emit('player update', player)
   })
 
+  socket.on('fold', (fold) => {
+    io.to(fold.game).emit('fold', fold.id)
+  })
+
   socket.on('disconnect', () => {
     io.emit('player disconnect', socket.id)
   })

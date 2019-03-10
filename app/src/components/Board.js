@@ -21,7 +21,10 @@ class Board extends Component {
     },
     pot: 0,
     players: [],
-    deck: Deck
+    deck: Deck,
+    turnPlayer: 0,
+    currentBet: 0,
+    message: null
   }
 
   componentDidMount(){
@@ -29,7 +32,7 @@ class Board extends Component {
 
     socket.on('player join', (socketId) => {
       if(!this.state.start && this.state.players.length < 8){
-        let newPlayer = {id: this.state.players.length + 1, socketId: socketId, bet: 0, stack: 1500, hand: []}
+        let newPlayer = {id: this.state.players.length + 1, socketId: socketId, bet: 0, stack: 1500, hand: [], fold: false}
         let players = this.state.players;
         players.push(newPlayer);
         this.setState({players: players})
@@ -39,6 +42,22 @@ class Board extends Component {
 
     socket.on('player disconnect', (id) => {
       this.dropPlayer(id);
+    })
+
+    socket.on('fold', (id) => {
+      let players = this.state.players;
+      players[id-1].fold = true;
+      this.setState({players: players})
+
+      let nonfolders = [];
+      players.forEach((player) => {
+        if(!player.fold){nonfolders.push(player)}
+      })
+
+      if(nonfolders.length === 1){
+        console.log(nonfolders[0])
+        this.setState({message: `P${nonfolders[0].id} wins`})
+      }
     })
   }
 
@@ -100,7 +119,7 @@ class Board extends Component {
               </div>
             ) : null
           }
-          { this.state.pot === 0 ? null && !this.state.start : <h1 style={styles.pot}>Pot: {this.state.pot}</h1>}
+          { this.state.message ? <h1 style={styles.message}>{this.state.message}</h1> : null }
           { !this.state.start ? <p style={styles.button} onClick={this.startGame}>Start Game</p> : null}
 
 
@@ -108,25 +127,7 @@ class Board extends Component {
 
           {
             this.state.players.map((player, index) => {
-              if(player === null) {
-                return null
-              } else{
-                if(player.bet > 0){
-                  return(
-                    <div key={index}>
-                      <h1 style={styles.bet}>Bet: {player.bet}</h1>
-                      <h1 style={styles.player}>P{index + 1} - {player.stack}</h1>
-                    </div>
-                  )
-                } else {
-                  return(
-                    <div key={index}>
-                      <br/>
-                      <h1 style={styles.player}>P{index + 1} - {player.stack}</h1>
-                    </div>
-                  )
-                }
-              }
+              return <h1 key={index} style={styles.player}>P{index+1}</h1>
             })
           }
         </div>
@@ -183,7 +184,12 @@ const styles = {
     cursor: 'pointer',
     color: '#001514',
     margin: '0 auto'
+  },
+  message: {
+    textAlign: 'center'
   }
 }
 
 export default Board;
+
+//{ this.state.pot === 0 ? null && !this.state.start : <h1 style={styles.pot}>Pot: {this.state.pot}</h1>}

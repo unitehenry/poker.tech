@@ -16,7 +16,9 @@ class Hand extends Component {
     stack: 0,
     hand: [],
     id: null,
-    pot: 0
+    pot: 0,
+    turn: false,
+    currentBet: 0
   }
 
   buyIn = () => {
@@ -25,6 +27,7 @@ class Hand extends Component {
 
   fold = () => {
     this.setState({hand: []})
+    socket.emit('fold', {id: this.state.id, game: this.props.id})
   }
 
   componentDidMount() {
@@ -56,18 +59,6 @@ class Hand extends Component {
               this.state.hand.length > 0 ? (
                 <React.Fragment>
                   <h1 style={styles.action} onClick={this.fold}>Fold</h1>
-                  <div style={styles.betActions}>
-                    {
-                      this.state.bet > 0 ? (
-                        <React.Fragment>
-                          <h1 style={styles.action}>Call</h1>
-                          <h1 style={styles.action}>{this.state.pot / 2}</h1>
-                          <h1 style={styles.action}>{this.state.pot}</h1>
-                          <h1 style={styles.actionAllIn}>All In</h1>
-                        </React.Fragment>
-                      ) : <h1 style={styles.action}>Check</h1>
-                    }
-                  </div>
                 </React.Fragment>
               ) : null
             ) : <h1 style={styles.action} onClick={this.buyIn}>Buy In</h1>
@@ -121,5 +112,17 @@ const styles = {
     cursor: 'pointer'
   }
 }
+
+/*
+<div style={styles.betActions}>
+  <React.Fragment>
+    {this.state.bet < this.state.currentBet ? <h1 style={styles.action} onClick={() => this.makeBet(this.state.currentBet)}>Call</h1> : null}
+    <h1 style={styles.action} onClick={() => {this.state.pot / 2 === 0 ? this.makeBet(100) : this.makeBet(this.state.pot / 2)}}>{this.state.pot / 2 === 0 ? '100' : this.state.pot / 2}</h1>
+    <h1 style={styles.action} onClick={() => {this.state.pot === 0 ? this.makeBet(200) : this.makeBet(this.state.pot)}}>{this.state.pot === 0 ? '200' : this.state.pot}</h1>
+    {this.state.bet === this.state.currentBet ? <h1 style={styles.action} onClick={() => this.makeBet('check')}>Check</h1> : null}
+    <h1 style={styles.actionAllIn} onClick={() => this.makeBet(this.state.stack)}>All In</h1>
+  </React.Fragment>
+</div>
+*/
 
 export default Hand;
