@@ -56,160 +56,159 @@ class Card {
     switch (card) {
       case '2C':
         return TwoClubs;
-        break;
       case '2D':
         return TwoDiamonds;
-        break;
       case '2H':
         return TwoHearts;
-        break;
+
       case '2S':
         return TwoSpades;
-        break;
+
       case '3C':
         return ThreeClubs;
-        break;
+
       case '3D':
         return ThreeDiamonds;
-        break;
+
       case '3H':
         return ThreeHearts;
-        break;
+
       case '3S':
         return ThreeSpades;
-        break;
+
       case '4C':
         return FourClubs;
-        break;
+
       case '4D':
         return FourDiamonds;
-        break;
+
       case '4H':
         return FourHearts;
-        break;
+
       case '4S':
         return FourSpades;
-        break;
+
       case '5C':
         return FiveClubs;
-        break;
+
       case '5D':
         return FiveDiamonds;
-        break;
+
       case '5H':
         return FiveHearts;
-        break;
+
       case '5S':
         return FiveSpades;
-        break;
+
       case '6C':
         return SixClubs;
-        break;
+
       case '6D':
         return SixDiamonds;
-        break;
+
       case '6H':
         return SixHearts;
-        break;
+
       case '6S':
         return SixSpades;
-        break;
+
       case '7C':
         return SevenClubs;
-        break;
+
       case '7D':
         return SevenDiamonds;
-        break;
+
       case '7H':
         return SevenHearts;
-        break;
+
       case '7S':
         return SevenSpades;
-        break;
+
       case '8C':
         return EightClubs;
-        break;
+
       case '8D':
         return EightDiamonds;
-        break;
+
       case '8H':
         return EightHearts;
-        break;
+
       case '8S':
         return EightSpades;
-        break;
+
       case '9C':
         return NineClubs;
-        break;
+
       case '9D':
         return NineDiamonds;
-        break;
+
       case '9H':
         return NineHearts;
-        break;
+
       case '9S':
         return NineSpades;
-        break;
+
       case 'TC':
         return TenClubs;
-        break;
+
       case 'TD':
         return TenDiamonds;
-        break;
+
       case 'TH':
         return TenHearts;
-        break;
+
       case 'TS':
         return TenSpades;
-        break;
+
       case 'JC':
         return JackClubs;
-        break;
+
       case 'JD':
         return JackDiamonds;
-        break;
+
       case 'JH':
         return JackHearts;
-        break;
+
       case 'JS':
         return JackSpades;
-        break;
+
       case 'QC':
         return QueenClubs;
-        break;
+
       case 'QD':
         return QueenDiamonds;
-        break;
+
       case 'QH':
         return QueenHearts;
-        break;
+
       case 'QS':
         return QueenSpades;
-        break;
+
       case 'KC':
         return KingClubs;
-        break;
+
       case 'KD':
         return KingDiamonds;
-        break;
+
       case 'KH':
         return KingHearts;
-        break;
+
       case 'KS':
         return KingSpades;
-        break;
+
       case 'AC':
         return AceClubs;
-        break;
+
       case 'AD':
         return AceDiamonds;
-        break;
+
       case 'AH':
         return AceHearts;
-        break;
+
       case 'AS':
         return AceSpades;
-        break;
+
+      default:
     }
   }
 
@@ -223,7 +222,6 @@ class Card {
         case 10:
           card = 'T';
           break;
-        default:
         case 11:
           card = 'J';
           break;
@@ -233,6 +231,7 @@ class Card {
         case 13:
           card = 'K';
           break;
+        default:
       }
     } else {
       card = value;
@@ -251,6 +250,7 @@ class Card {
       case 4:
         card += 'D';
         break;
+      default:
     }
 
     return card;
