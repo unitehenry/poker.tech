@@ -1,36 +1,66 @@
 import React, { Component } from 'react';
 
-import TwoClubs from '../assets/cards/2C.jpg';
+import Cards from '../Card';
+
+const Card = new Cards();
 
 class Board extends Component {
+
+  state = {
+    board: {
+      flop: [],
+      turn: '',
+      river: ''
+    },
+    pot: 1200,
+    players: [
+      {bet: 0, stack: 1500},
+      {bet: 0, stack: 1500},
+      {bet: 0, stack: 1500},
+      {bet: 0, stack: 1500},
+      {bet: 0, stack: 1500},
+      {bet: 0, stack: 1500},
+      {bet: 200, stack: 1300},
+      {bet: 400, stack: 1100}
+    ]
+  }
 
   render(){
     return (
       <React.Fragment>
         <h1 style={styles.header}>Poker.Tech</h1>
         <div style={styles.board}>
-          <img src={TwoClubs} draggable="false" alt="card" style={styles.card}/>
-          <img src={TwoClubs} draggable="false" alt="card" style={styles.card}/>
-          <img src={TwoClubs} draggable="false" alt="card" style={styles.card}/>
+         <img src={Card.getImage(Card.generateCard())} draggable="false" alt="card" style={styles.card}/>
+         <img src={Card.getImage(Card.generateCard())} draggable="false" alt="card" style={styles.card}/>
+         <img src={Card.getImage(Card.generateCard())} draggable="false" alt="card" style={styles.card}/>
 
-          <img src={TwoClubs} draggable="false" alt="card" style={styles.card}/>
-          <img src={TwoClubs} draggable="false" alt="card" style={styles.card}/>
+         <img src={Card.getImage(Card.generateCard())} draggable="false" alt="card" style={styles.card}/>
+         <img src={Card.getImage(Card.generateCard())} draggable="false" alt="card" style={styles.card}/>
         </div>
 
-        <h1 style={styles.pot}>Pot: 500</h1>
+        <h1 style={styles.pot}>Pot: {this.state.pot}</h1>
 
         <div style={styles.players}>
-          <div>
-            <h1 style={styles.bet}>Bet: 150</h1>
-            <h1 style={styles.player}>P1 - 1500</h1>
-          </div>
-          <div>
-            <h1 style={styles.bet}>Bet: 150</h1>
-            <h1 style={styles.player}>P2 - 1500</h1>
-          </div><div>
-            <h1 style={styles.bet}>Bet: 150</h1>
-            <h1 style={styles.player}>P3 - 1500</h1>
-          </div>
+
+          {
+            this.state.players.map((player, index) => {
+              if(player.bet > 0){
+                return(
+                  <div>
+                    <h1 style={styles.bet}>Bet: {player.bet}</h1>
+                    <h1 style={styles.player}>P{index + 1} - {player.stack}</h1>
+                  </div>
+                )
+              } else {
+                return(
+                  <div>
+                    <br/>
+                    <h1 style={styles.player}>P{index + 1} - {player.stack}</h1>
+                  </div>
+                )
+              }
+            })
+          }
         </div>
       </React.Fragment>
     )
