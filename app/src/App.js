@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Landing from './components/Landing';
 import Board from './components/Board';
 import Hand from './components/Hand';
 
 import './App.css';
-
-import io from 'socket.io-client';
-const socket = io('http://localhost:8080/');
 
 class App extends Component {
 
@@ -26,7 +24,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        { this.state.player === null ? <Landing dealer={this.state.dealer} isPlayer={this.isPlayer} /> : null }
+        <Router>
+          <Route path="/:id" render={(props) => this.state.player === null ? <Landing {...props} dealer={this.state.dealer} isPlayer={this.isPlayer} /> : null}/>
+        </Router>
         { this.state.player === false ? <Board /> : null}
         { this.state.player ? <Hand /> : null }
       </div>

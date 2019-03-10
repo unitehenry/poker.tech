@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 
+import io from 'socket.io-client';
+const socket = io('http://localhost:8080/');
+
 class Landing extends Component{
 
   setDealer = () => {
     this.setState({dealer: true})
     this.props.isPlayer(false)
+  }
+
+  componentDidMount(){
+    socket.emit('join game', this.props.match.params.id)
   }
 
   render(){

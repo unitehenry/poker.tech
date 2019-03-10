@@ -52,14 +52,14 @@ class Board extends Component {
             this.state.players.map((player, index) => {
               if(player.bet > 0){
                 return(
-                  <div>
+                  <div key={index}>
                     <h1 style={styles.bet}>Bet: {player.bet}</h1>
                     <h1 style={styles.player}>P{index + 1} - {player.stack}</h1>
                   </div>
                 )
               } else {
                 return(
-                  <div>
+                  <div key={index}>
                     <br/>
                     <h1 style={styles.player}>P{index + 1} - {player.stack}</h1>
                   </div>
