@@ -12,7 +12,7 @@ class Board extends Component {
       turn: '',
       river: ''
     },
-    pot: 600,
+    pot: 0,
     players: [
       {bet: 0, stack: 1500},
       {bet: 0, stack: 1500},
@@ -20,8 +20,8 @@ class Board extends Component {
       {bet: 0, stack: 1500},
       {bet: 0, stack: 1500},
       {bet: 0, stack: 1500},
-      {bet: 200, stack: 1300},
-      {bet: 400, stack: 1100}
+      {bet: 0, stack: 1500},
+      {bet: 0, stack: 1500}
     ]
   }
 
@@ -44,7 +44,7 @@ class Board extends Component {
          {this.state.board.river ? <img src={Card.getImage(this.state.board.river)} draggable="false" alt="card" style={styles.card}/> : null}
         </div>
 
-        <h1 style={styles.pot}>Pot: {this.state.pot}</h1>
+        { this.state.pot === 0 ? null : <h1 style={styles.pot}>Pot: {this.state.pot}</h1>}
 
         <div style={styles.players}>
 
