@@ -40,24 +40,25 @@ class Hand extends Component {
         <div style={styles.betting}>
           {
             this.state.stack !== 0 ? (
-              <React.Fragment>
-                <h1 style={styles.action} onClick={this.fold}>Fold</h1>
-                <div style={styles.betActions}>
-                  {
-                    this.state.bet ? (
-                      <React.Fragment>
-                        <h1 style={styles.action}>Call</h1>
-                        <h1 style={styles.action}>{this.state.pot / 2}</h1>
-                        <h1 style={styles.action}>{this.state.pot}</h1>
-                        <h1 style={styles.actionAllIn}>All In</h1>
-                      </React.Fragment>
-                    ) : <h1 style={styles.action}>Check</h1>
-                  }
-                </div>
-              </React.Fragment>
+              this.state.hand.length > 0 ? (
+                <React.Fragment>
+                  <h1 style={styles.action} onClick={this.fold}>Fold</h1>
+                  <div style={styles.betActions}>
+                    {
+                      this.state.bet ? (
+                        <React.Fragment>
+                          <h1 style={styles.action}>Call</h1>
+                          <h1 style={styles.action}>{this.state.pot / 2}</h1>
+                          <h1 style={styles.action}>{this.state.pot}</h1>
+                          <h1 style={styles.actionAllIn}>All In</h1>
+                        </React.Fragment>
+                      ) : <h1 style={styles.action}>Check</h1>
+                    }
+                  </div>
+                </React.Fragment>
+              ) : null
             ) : <h1 style={styles.action} onClick={this.buyIn}>Buy In</h1>
           }
-
         </div>
       </React.Fragment>
     )

@@ -253,8 +253,6 @@ class Card {
         break;
     }
 
-    console.log(card);
-
     return card;
   }
 
