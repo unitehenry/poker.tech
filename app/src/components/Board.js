@@ -31,7 +31,7 @@ class Board extends Component {
     socket.emit('join game', this.props.id);
 
     socket.on('player join', (socketId) => {
-      if(!this.state.start && this.state.players.length < 8){
+      if(this.state.players.length < 8){
         let newPlayer = {id: this.state.players.length + 1, socketId: socketId, bet: 0, stack: 1500, hand: [], fold: false}
         let players = this.state.players;
         players.push(newPlayer);
@@ -53,10 +53,14 @@ class Board extends Component {
       players.forEach((player) => {
         if(!player.fold){nonfolders.push(player)}
       })
-
+      
       if(nonfolders.length === 1){
-        console.log(nonfolders[0])
         this.setState({message: `P${nonfolders[0].id} wins`})
+      }
+
+      if(nonfolders.length === 0){
+        this.setState({message: null})
+        this.dealHands();
       }
     })
   }
