@@ -25,19 +25,15 @@ class Board extends Component {
     socket.emit('join game', this.props.id);
 
     socket.on('player join', (socketId) => {
-      let currentPlayers = 0;
 
-      this.state.players.forEach((player) => {
-        if(player !== null){currentPlayers++}
-      })
-
-      if(currentPlayers < 8){
+      if(!this.state.start && this.state.players.length < 8){
         let newPlayer = {id: this.state.players.length + 1, socketId: socketId, bet: 0, stack: 1500, hand: []}
         let players = this.state.players;
         players.push(newPlayer);
         this.setState({players: players})
         socket.emit('update player', newPlayer)
       }
+
     })
 
     socket.on('player disconnect', (id) => {
@@ -47,19 +43,23 @@ class Board extends Component {
 
   dropPlayer = (id) => {
     let players = this.state.players;
+    let index;
 
-    players = this.state.players.map((player) => {
-      if(player !== null){
-        if(player.socketId === id){return null}
-        else{ return player }
+    players.forEach((player, i) => {
+      if(player.socketId === id){
+        index = i;
       }
     })
+
+    players = players.splice(index, 1);
 
     this.setState({players: players})
   }
 
   startGame = () => {
-    this.setState({start: true})
+    if(this.state.players.length > 1){
+      this.setState({start: true})
+    }
   }
 
   render(){
