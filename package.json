@@ -12,6 +12,9 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "nodemon": "^1.18.10",
+    "serve-favicon": "^2.5.0",
+    "short-id": "0.1.0-1",
+    "shortid": "^2.2.14",
     "socket.io": "^2.2.0"
   }
 }

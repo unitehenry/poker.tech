@@ -1,12 +1,25 @@
 const express = require('express');
 const app = express();
 const port = 8080;
+const path = require('path');
 
 const cors = require('cors');
-app.use(cors());
 
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+
+const shortid = require('short-id');
+
+const favicon = require('serve-favicon')
+app.use(favicon(path.join(__dirname, '/app/build/', 'favicon.ico')))
+
+app.use(cors());
+
+app.use(express.static(path.join(__dirname, 'app/build')));
+
+app.get('/:id', (req, res) => {
+    res.sendFile(path.join(__dirname + '/app/build/index.html'))
+})
 
 io.on('connection', (socket) => {
   console.log('client connected')
