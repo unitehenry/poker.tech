@@ -11,14 +11,14 @@ const io = require('socket.io')(http);
 const shortid = require('short-id');
 
 const favicon = require('serve-favicon')
-app.use(favicon(path.join(__dirname, '/build/', 'favicon.ico')))
+app.use(favicon(path.join(__dirname, 'app/build/', 'favicon.ico')))
 
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, '/build')));
+app.use(express.static(path.join(__dirname, 'app/build')));
 
 app.get('/:id', (req, res) => {
-    res.sendFile(path.join(__dirname + '/build/index.html'))
+    res.sendFile(path.join(__dirname + 'app/build/index.html'))
 })
 
 io.on('connection', (socket) => {
