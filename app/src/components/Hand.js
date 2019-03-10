@@ -10,8 +10,8 @@ class Hand extends Component {
     bet: 0,
     stack: 0,
     hand: [],
-    player: 2,
-    pot: 800
+    player: 1,
+    pot: 0
   }
 
   buyIn = () => {
