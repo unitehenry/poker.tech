@@ -42,8 +42,10 @@ class Board extends Component {
     let players = this.state.players;
 
     players = this.state.players.map((player) => {
-      if(player.socketId === id && player.socketId !== null){return null}
-      else{ return player }
+      if(player.socketId !== null){
+        if(player.socketId === id){return null}
+        else{ return player }
+      }
     })
 
     this.setState({players: players})
