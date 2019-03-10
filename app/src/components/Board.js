@@ -21,10 +21,14 @@ class Board extends Component {
   }
 
   componentDidMount(){
+    socket.emit('join game', this.props.id);
+
     socket.on('player join', () => {
-      let players = this.state.players;
-      players.push({bet: 0, stack: 1500})
-      this.setState({players: players})
+      if(this.state.players.length < 8){
+        let players = this.state.players;
+        players.push({bet: 0, stack: 1500});
+        this.setState({players: players})
+      }
     })
   }
 

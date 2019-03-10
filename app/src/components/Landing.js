@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 
-import io from 'socket.io-client';
-const socket = io('http://localhost:8080/');
-
 class Landing extends Component{
 
   setDealer = () => {
@@ -12,11 +9,10 @@ class Landing extends Component{
 
   playerJoin = () => {
     this.props.isPlayer(true);
-    socket.emit('player join', this.props.match.params.id)
   }
 
   componentDidMount(){
-    socket.emit('join game', this.props.match.params.id)
+    this.props.setId(this.props.match.params.id)
   }
 
   render(){
@@ -24,8 +20,8 @@ class Landing extends Component{
       <div>
         <p style={styles.header}>Poker.Tech</p>
         <div style={styles.buttons}>
-          { this.props.dealer ? null : <p style={styles.button} onClick={this.setDealer}>Dealer</p>}
-          <p style={styles.button} onClick={this.playerJoin}>{this.props.dealer ? 'Join' : 'Player'}</p>
+          { this.props.dealer ? null : <p style={styles.button} onClick={this.setDealer} id={this.props.id}>Dealer</p>}
+          <p style={styles.button} onClick={this.playerJoin} id={this.props.id}>{this.props.dealer ? 'Join' : 'Player'}</p>
         </div>
       </div>
     )

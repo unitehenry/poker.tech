@@ -19,6 +19,8 @@ class Hand extends Component {
   }
 
   buyIn = () => {
+    socket.emit('player join', this.props.id)
+
     this.setState({stack: 1500, hand: [Card.generateCard(), Card.generateCard()]})
   }
 
@@ -27,7 +29,7 @@ class Hand extends Component {
   }
 
   componentDidMount() {
-    
+    socket.emit('join game', this.props.id);
   }
 
   render(){

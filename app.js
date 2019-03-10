@@ -17,7 +17,6 @@ io.on('connection', (socket) => {
   })
 
   socket.on('player join', (id) => {
-    console.log(`player joined in ${id}`)
     io.to(id).emit('player join');
   })
 })
