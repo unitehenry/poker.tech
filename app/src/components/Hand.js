@@ -7,7 +7,7 @@ const Card = new Cards();
 class Hand extends Component {
 
   state = {
-    bet: true,
+    bet: 0,
     stack: 0,
     hand: [],
     player: 2,
@@ -45,7 +45,7 @@ class Hand extends Component {
                   <h1 style={styles.action} onClick={this.fold}>Fold</h1>
                   <div style={styles.betActions}>
                     {
-                      this.state.bet ? (
+                      this.state.bet > 0 ? (
                         <React.Fragment>
                           <h1 style={styles.action}>Call</h1>
                           <h1 style={styles.action}>{this.state.pot / 2}</h1>
