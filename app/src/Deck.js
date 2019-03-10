@@ -1,9 +1,5 @@
 class Deck {
 
-  constructor(){
-    let cards = [];
-  }
-
   generateDeck(){
     this.cards = [];
 
@@ -18,34 +14,36 @@ class Deck {
         } else{
           switch (v) {
             case 10:
-              if(s === 1){card = 'T' + 'C'; this.cards.push(card);}
-              if(s === 2){card = 'T' + 'H'; this.cards.push(card);}
-              if(s === 3){card = 'T' + 'D'; this.cards.push(card);}
-              if(s === 4){card = 'T' + 'S'; this.cards.push(card);}
+              if(s === 1){card = 'TC'; this.cards.push(card);}
+              if(s === 2){card = 'TH'; this.cards.push(card);}
+              if(s === 3){card = 'TD'; this.cards.push(card);}
+              if(s === 4){card = 'TS'; this.cards.push(card);}
               break;
             case 11:
-              if(s === 1){card = 'J' + 'C'; this.cards.push(card);}
-              if(s === 2){card = 'J' + 'H'; this.cards.push(card);}
-              if(s === 3){card = 'J' + 'D'; this.cards.push(card);}
-              if(s === 4){card = 'J' + 'S'; this.cards.push(card);}
+              if(s === 1){card = 'JC'; this.cards.push(card);}
+              if(s === 2){card = 'JH'; this.cards.push(card);}
+              if(s === 3){card = 'JD'; this.cards.push(card);}
+              if(s === 4){card = 'JS'; this.cards.push(card);}
               break;
             case 12:
-              if(s === 1){card = 'Q' + 'C'; this.cards.push(card);}
-              if(s === 2){card = 'Q' + 'H'; this.cards.push(card);}
-              if(s === 3){card = 'Q' + 'D'; this.cards.push(card);}
-              if(s === 4){card = 'Q' + 'S'; this.cards.push(card);}
+              if(s === 1){card = 'QC'; this.cards.push(card);}
+              if(s === 2){card = 'QH'; this.cards.push(card);}
+              if(s === 3){card = 'QD'; this.cards.push(card);}
+              if(s === 4){card = 'QS'; this.cards.push(card);}
               break;
             case 13:
-              if(s === 1){card = 'K' + 'C'; this.cards.push(card);}
-              if(s === 2){card = 'K' + 'H'; this.cards.push(card);}
-              if(s === 3){card = 'K' + 'D'; this.cards.push(card);}
-              if(s === 4){card = 'K' + 'S'; this.cards.push(card);}
+              if(s === 1){card = 'KC'; this.cards.push(card);}
+              if(s === 2){card = 'KH'; this.cards.push(card);}
+              if(s === 3){card = 'KD'; this.cards.push(card);}
+              if(s === 4){card = 'KS'; this.cards.push(card);}
               break;
             case 14:
-              if(s === 1){card = 'A' + 'C'; this.cards.push(card);}
-              if(s === 2){card = 'A' + 'H'; this.cards.push(card);}
-              if(s === 3){card = 'A' + 'D'; this.cards.push(card);}
-              if(s === 4){card = 'A' + 'S'; this.cards.push(card);}
+              if(s === 1){card = 'AC'; this.cards.push(card);}
+              if(s === 2){card = 'AH'; this.cards.push(card);}
+              if(s === 3){card = 'AD'; this.cards.push(card);}
+              if(s === 4){card = 'AS'; this.cards.push(card);}
+              break;
+            default:
               break;
           }
         }
@@ -54,7 +52,7 @@ class Deck {
   }
 
   dealTop(){
-    return this.cards.splice(Math.floor(Math.random() * 52, 1))[0];
+    return this.cards.splice(Math.floor(Math.random() * this.cards.length), 1)[0];
   }
 }
 

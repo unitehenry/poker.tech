@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
 import Cards from '../Card';
+import Decks from '../Deck';
 
 import io from 'socket.io-client';
 
 const Card = new Cards();
+const Deck = new Decks();
 
 const socket = io('http://localhost:8080/');
 
@@ -18,7 +20,8 @@ class Board extends Component {
       river: ''
     },
     pot: 0,
-    players: []
+    players: [],
+    deck: Deck
   }
 
   componentDidMount(){
@@ -58,7 +61,21 @@ class Board extends Component {
   startGame = () => {
     if(this.state.players.length > 1){
       this.setState({start: true})
+      this.dealHands();
     }
+  }
+
+  dealHands = () => {
+    this.state.deck.generateDeck();
+
+    let players = this.state.players;
+
+    players.forEach((player, i) => {
+      players[i].hand = [this.state.deck.dealTop(), this.state.deck.dealTop()]
+      socket.emit('update player', players[i])
+    })
+
+    this.setState({players: players})
   }
 
   render(){
