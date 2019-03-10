@@ -12,7 +12,7 @@ class Board extends Component {
       turn: '',
       river: ''
     },
-    pot: 1200,
+    pot: 600,
     players: [
       {bet: 0, stack: 1500},
       {bet: 0, stack: 1500},
@@ -30,12 +30,18 @@ class Board extends Component {
       <React.Fragment>
         <h1 style={styles.header}>Poker.Tech</h1>
         <div style={styles.board}>
-         <img src={Card.getImage(Card.generateCard())} draggable="false" alt="card" style={styles.card}/>
-         <img src={Card.getImage(Card.generateCard())} draggable="false" alt="card" style={styles.card}/>
-         <img src={Card.getImage(Card.generateCard())} draggable="false" alt="card" style={styles.card}/>
-
-         <img src={Card.getImage(Card.generateCard())} draggable="false" alt="card" style={styles.card}/>
-         <img src={Card.getImage(Card.generateCard())} draggable="false" alt="card" style={styles.card}/>
+          {
+            this.state.board.flop.length !== 0 ?
+            (
+              <React.Fragment>
+                <img src={Card.getImage(this.state.board.flop[0])} draggable="false" alt="card" style={styles.card}/>
+                <img src={Card.getImage(this.state.board.flop[1])} draggable="false" alt="card" style={styles.card}/>
+                <img src={Card.getImage(this.state.board.flop[2])} draggable="false" alt="card" style={styles.card}/>
+              </React.Fragment>
+            ) : null
+          }
+         {this.state.board.turn ? <img src={Card.getImage(this.state.board.turn)} draggable="false" alt="card" style={styles.card}/> : null}
+         {this.state.board.river ? <img src={Card.getImage(this.state.board.river)} draggable="false" alt="card" style={styles.card}/> : null}
         </div>
 
         <h1 style={styles.pot}>Pot: {this.state.pot}</h1>
