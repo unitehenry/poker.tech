@@ -53,7 +53,7 @@ class Board extends Component {
       players.forEach((player) => {
         if(!player.fold){nonfolders.push(player)}
       })
-      
+
       if(nonfolders.length === 1){
         this.setState({message: `P${nonfolders[0].id} wins`})
       }
@@ -101,6 +101,19 @@ class Board extends Component {
     this.setState({players: players})
   }
 
+  dealBoard = () => {
+    if(this.state.board.flop.length === 0){
+      let flop = [this.state.deck.dealTop(), this.state.deck.dealTop(), this.state.deck.dealTop()]
+      this.setState({board: {flop: flop, turn: '', river: ''}})
+    } else if(this.state.board.turn === ''){
+      this.setState({board: {flop: this.state.board.flop, turn: this.state.deck.dealTop(), river: ''}})
+    } else if(this.state.board.river === '' && this.state.board.turn !== ''){
+      this.setState({board: {flop: this.state.board.flop, turn: this.state.board.turn, river: this.state.deck.dealTop()}})
+    } else {
+      alert('winner is...')
+    }
+  }
+
   render(){
     return (
       <React.Fragment>
@@ -108,23 +121,26 @@ class Board extends Component {
           {
             this.state.start ? (
               <div style={styles.board}>
-                {
-                  this.state.board.flop.length !== 0 ?
-                  (
-                    <React.Fragment>
-                      <img src={Card.getImage(this.state.board.flop[0])} draggable="false" alt="card" style={styles.card}/>
-                      <img src={Card.getImage(this.state.board.flop[1])} draggable="false" alt="card" style={styles.card}/>
-                      <img src={Card.getImage(this.state.board.flop[2])} draggable="false" alt="card" style={styles.card}/>
-                    </React.Fragment>
-                  ) : null
-                }
-               {this.state.board.turn ? <img src={Card.getImage(this.state.board.turn)} draggable="false" alt="card" style={styles.card}/> : null}
-               {this.state.board.river ? <img src={Card.getImage(this.state.board.river)} draggable="false" alt="card" style={styles.card}/> : null}
+                <React.Fragment>
+                  {this.state.board.flop[0] ? <img src={Card.getImage(this.state.board.flop[0])} draggable="false" alt="card" style={styles.card}/> : null}
+                  {this.state.board.flop[1] ? <img src={Card.getImage(this.state.board.flop[1])} draggable="false" alt="card" style={styles.card}/> : null}
+                  {this.state.board.flop[2] ? <img src={Card.getImage(this.state.board.flop[2])} draggable="false" alt="card" style={styles.card}/> : null}
+                </React.Fragment>
+               {this.state.board.turn !== '' ? <img src={Card.getImage(this.state.board.turn)} draggable="false" alt="card" style={styles.card}/> : null}
+               {this.state.board.river !== '' ? <img src={Card.getImage(this.state.board.river)} draggable="false" alt="card" style={styles.card}/> : null}
               </div>
             ) : null
           }
           { this.state.message ? <h1 style={styles.message}>{this.state.message}</h1> : null }
-          { !this.state.start ? <p style={styles.button} onClick={this.startGame}>Start Game</p> : null}
+          {
+          !this.state.start ? <p style={styles.button} onClick={this.startGame}>Start Game</p> :
+          <p style={styles.button} onClick={this.dealBoard}>
+            {
+              this.state.board.flop.length !== 0 && this.state.board.turn !== '' && this.state.board.river !== '' ?
+              'Reveal Winner' : 'Deal'
+            }
+          </p>
+        }
 
 
         <div style={styles.players}>
@@ -152,7 +168,8 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-evenly',
     width: '50vw',
-    margin: '0 auto'
+    margin: '0 auto',
+    paddingBottom: '10vh'
   },
   card: {
     height: '10em',
@@ -191,6 +208,17 @@ const styles = {
   },
   message: {
     textAlign: 'center'
+  },
+  dealButton: {
+    backgroundColor: '#D0F1BF',
+    textAlign: 'center',
+    border: '1px solid #001514',
+    padding: '15px',
+    width: '7em',
+    fontSize: '2em',
+    userSelect: 'none',
+    cursor: 'pointer',
+    color: '#001514'
   }
 }
 
