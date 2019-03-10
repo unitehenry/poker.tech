@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 
 const Card = new Cards();
 
-const socket = io('http://localhost:8080/');
+const socket = io('');
 
 class Hand extends Component {
 
