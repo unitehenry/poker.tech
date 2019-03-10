@@ -11,6 +11,7 @@ const socket = io('http://localhost:8080/');
 class Board extends Component {
 
   state = {
+    start: false,
     board: {
       flop: [],
       turn: '',
@@ -57,26 +58,35 @@ class Board extends Component {
     this.setState({players: players})
   }
 
+  startGame = () => {
+    this.setState({start: true})
+  }
+
   render(){
     return (
       <React.Fragment>
         <h1 style={styles.header}>Poker.Tech</h1>
-        <div style={styles.board}>
           {
-            this.state.board.flop.length !== 0 ?
-            (
-              <React.Fragment>
-                <img src={Card.getImage(this.state.board.flop[0])} draggable="false" alt="card" style={styles.card}/>
-                <img src={Card.getImage(this.state.board.flop[1])} draggable="false" alt="card" style={styles.card}/>
-                <img src={Card.getImage(this.state.board.flop[2])} draggable="false" alt="card" style={styles.card}/>
-              </React.Fragment>
+            this.state.start ? (
+              <div style={styles.board}>
+                {
+                  this.state.board.flop.length !== 0 ?
+                  (
+                    <React.Fragment>
+                      <img src={Card.getImage(this.state.board.flop[0])} draggable="false" alt="card" style={styles.card}/>
+                      <img src={Card.getImage(this.state.board.flop[1])} draggable="false" alt="card" style={styles.card}/>
+                      <img src={Card.getImage(this.state.board.flop[2])} draggable="false" alt="card" style={styles.card}/>
+                    </React.Fragment>
+                  ) : null
+                }
+               {this.state.board.turn ? <img src={Card.getImage(this.state.board.turn)} draggable="false" alt="card" style={styles.card}/> : null}
+               {this.state.board.river ? <img src={Card.getImage(this.state.board.river)} draggable="false" alt="card" style={styles.card}/> : null}
+              </div>
             ) : null
           }
-         {this.state.board.turn ? <img src={Card.getImage(this.state.board.turn)} draggable="false" alt="card" style={styles.card}/> : null}
-         {this.state.board.river ? <img src={Card.getImage(this.state.board.river)} draggable="false" alt="card" style={styles.card}/> : null}
-        </div>
+          { this.state.pot === 0 ? null && !this.state.start : <h1 style={styles.pot}>Pot: {this.state.pot}</h1>}
+          { !this.state.start ? <p style={styles.button} onClick={this.startGame}>Start Game</p> : null}
 
-        { this.state.pot === 0 ? null : <h1 style={styles.pot}>Pot: {this.state.pot}</h1>}
 
         <div style={styles.players}>
 
@@ -145,6 +155,18 @@ const styles = {
   pot: {
     textAlign: 'center',
     fontSize: '5vw'
+  },
+  button: {
+    backgroundColor: '#D0F1BF',
+    textAlign: 'center',
+    border: '1px solid #001514',
+    padding: '15px',
+    width: '7em',
+    fontSize: '2em',
+    userSelect: 'none',
+    cursor: 'pointer',
+    color: '#001514',
+    margin: '0 auto'
   }
 }
 
