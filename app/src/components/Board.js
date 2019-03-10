@@ -110,7 +110,8 @@ class Board extends Component {
     } else if(this.state.board.river === '' && this.state.board.turn !== ''){
       this.setState({board: {flop: this.state.board.flop, turn: this.state.board.turn, river: this.state.deck.dealTop()}})
     } else {
-      alert('winner is...')
+      this.setState({board: {flop: [], turn: '', river: ''}})
+      this.dealHands();
     }
   }
 
