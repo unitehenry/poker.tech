@@ -23,6 +23,7 @@ class Landing extends Component{
           { this.props.dealer ? null : <p style={styles.button} onClick={this.setDealer} id={this.props.id}>Dealer</p>}
           <p style={styles.button} onClick={this.playerJoin} id={this.props.id}>{this.props.dealer ? 'Join' : 'Player'}</p>
         </div>
+        <p style={styles.footer}>Find this on <a style={{textDecoration: 'none', color: 'inherit'}} href="https://github.com/unitehenry/poker.tech" target="_blank">GitHub.</a></p>
       </div>
     )
   }
@@ -52,6 +53,12 @@ const styles = {
     userSelect: 'none',
     cursor: 'pointer',
     color: '#001514'
+  },
+  footer:{
+    textAlign: 'center',
+    fontSize: '1.5em',
+    textDecoration: 'none',
+    color: 'inherit'
   }
 }
 
