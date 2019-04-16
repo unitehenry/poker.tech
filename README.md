@@ -1,6 +1,6 @@
 # Interactive Tabletop Poker
 
-This project was creeated at [ProfHacks 2019](https://profhacks2019.devpost.com/)
+This project was created at [ProfHacks 2019](https://profhacks2019.devpost.com/)
 
 ## Things to do
 1. ~~'Find this on GitHub' link.~~
